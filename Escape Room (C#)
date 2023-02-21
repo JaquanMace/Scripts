@@ -1,0 +1,74 @@
+This code will prompt the user to complete three tasks that require intelligence, and then ask them to enter the code to escape the room. 
+If the user enters the correct code, they will escape the room and the program will end. 
+If they enter the wrong code, the program will let them know and end. If they fail any of the tasks, the program will let them know and end.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        int task1Answer = 7; // Change this to the correct answer for task 1
+        int task2Answer = 21; // Change this to the correct answer for task 2
+        int task3Answer = 12; // Change this to the correct answer for task 3
+        string code = "2231"; // The correct code to escape the room
+
+        Console.WriteLine("Welcome to the Escape Room!");
+
+        // Task 1
+        Console.WriteLine("Task 1: Solve the following equation for x: 2x + 3 = 17");
+        int task1Input = Convert.ToInt32(Console.ReadLine());
+        if (task1Input == task1Answer)
+        {
+            Console.WriteLine("Correct!");
+        }
+        else
+        {
+            Console.WriteLine("Incorrect. You cannot escape the room yet.");
+            Console.ReadKey();
+            return;
+        }
+
+        // Task 2
+        Console.WriteLine("Task 2: What is the next number in the sequence 1, 2, 4, 7, 11, 16, 22, ?");
+        int task2Input = Convert.ToInt32(Console.ReadLine());
+        if (task2Input == task2Answer)
+        {
+            Console.WriteLine("Correct!");
+        }
+        else
+        {
+            Console.WriteLine("Incorrect. You cannot escape the room yet.");
+            Console.ReadKey();
+            return;
+        }
+
+        // Task 3
+        Console.WriteLine("Task 3: How many squares are there on a standard chessboard?");
+        int task3Input = Convert.ToInt32(Console.ReadLine());
+        if (task3Input == task3Answer)
+        {
+            Console.WriteLine("Correct!");
+        }
+        else
+        {
+            Console.WriteLine("Incorrect. You cannot escape the room yet.");
+            Console.ReadKey();
+            return;
+        }
+
+        // Final task
+        Console.WriteLine("You have completed all the tasks. Enter the code to escape the room:");
+        string userInput = Console.ReadLine();
+        if (userInput == code)
+        {
+            Console.WriteLine("Congratulations! You have escaped the room!");
+        }
+        else
+        {
+            Console.WriteLine("Incorrect code. You cannot escape the room yet.");
+        }
+
+        Console.ReadKey();
+    }
+}
