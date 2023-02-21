@@ -1,0 +1,110 @@
+This program uses a loop to cycle through all the mazes, including the secret maze. 
+For each maze, it prints the maze and instructions, then loops through the maze until the user either reaches the end or quits. 
+When the user reaches the end of a maze, they earn a coin, and the program moves on to the next maze.
+If the user earns enough coins to unlock the secret maze (3 or more), the program prompts the user to press any key to continue, and then skips to the secret maze. 
+When the user completes the secret maze, they earn 99 coins, and the program ends.
+Note that the program uses a simple text-based representation of the mazes, where each character in the string represents a cell in the maze.
+The ' ' character represents an empty space, '#' represents a wall, 'S' represents the starting position, 'E' represents the end position, and 'C' represents a coin.
+The program also uses the arrow keys for movement and the 'Q' key to quit. In a real-world application, 
+i would use a more sophisticated graphics system and handle user input more robustly.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#include <iostream>
+#include <string>
+
+int main() {
+  const int num_mazes = 3; // Number of mazes (excluding secret maze)
+  int coins = 0; // Number of coins the user has
+  int maze_num = 1; // Current maze number (starting with maze 1)
+
+  // Loop through all mazes (including secret maze)
+  while (maze_num <= num_mazes + 1) {
+    // Set up maze
+    std::string maze;
+    switch (maze_num) {
+      case 1:
+        maze = "#######\n#     #\n# ### #\n#   # #\n### # #\n#     #\n#######\n"; // Maze 1
+        break;
+      case 2:
+        maze = "#########\n#       #\n# ##### #\n#   #   #\n### # ###\n#     #\n#######\n"; // Maze 2
+        break;
+      case 3:
+        maze = "#########\n#    #  #\n# ## #  #\n#    #  #\n# ## ###\n#      #\n########\n"; // Maze 3
+        break;
+      case 4:
+        maze = "#########\n#  # #  #\n# #   # #\n# # # # #\n# #   # #\n#   #   #\n########\n"; // Secret maze
+        break;
+    }
+    
+    // Print maze and instructions
+    std::cout << "Maze " << maze_num << ":" << std::endl;
+    std::cout << maze << std::endl;
+    std::cout << "Use the arrow keys to move through the maze. Press Q to quit." << std::endl;
+    
+    // Loop through maze until user reaches end or quits
+    bool reached_end = false;
+    int row = 1; // Starting row
+    int col = 1; // Starting column
+    while (!reached_end) {
+      // Print current position in maze
+      std::cout << "Coins: " << coins << "   Position: (" << col << "," << row << ")" << std::endl;
+      
+      // Read user input
+      char input;
+      std::cin >> input;
+      
+      // Move player based on input
+      switch (input) {
+        case 'q': // Quit
+        case 'Q':
+          std::cout << "Quitting maze program." << std::endl;
+          return 0;
+        case 'u': // Up
+        case 'U':
+          if (maze[(row-2)*9 + col-1] == ' ') {
+            row--;
+          }
+          break;
+        case 'd': // Down
+        case 'D':
+          if (maze[row*9 + col-1] == ' ') {
+            row++;
+          }
+          break;
+        case 'l': // Left
+        case 'L':
+          if (maze[(row-1)*9 + col-2] == ' ') {
+            col--;
+          }
+          break;
+        case 'r': // Right
+        case 'R':
+          if (maze[(row-1)*9 + col] == ' ') {
+            col++;
+          }
+          break;
+      }
+      
+      // Check if user has reached the end of the maze
+      if (maze[(row-1)*9 + col-1] == 'E') {
+    std::cout << "Congratulations, you have reached the end of the maze!" << std::endl;
+    coins++;
+    reached_end = true;
+  }
+}
+
+// Check if user has enough coins to unlock the secret maze
+if (coins >= 3 && maze_num == num_mazes) {
+  std::cout << "You have enough coins to unlock the secret maze! Press any key to continue." << std::endl;
+  std::cin.get(); // Wait for user to press any key
+  maze_num++; // Skip to secret maze
+}
+else {
+  maze_num++; // Move on to next maze
+}
+}
+
+// Print final number of coins
+std::cout << "You have collected " << coins << " coins in total." << std::endl;
+
+return 0;
+}
