@@ -1,0 +1,78 @@
+This code creates the HTML markup for the signup and login forms using createElement and sets the appropriate attributes for each form element. 
+It then adds the form elements to the appropriate form and adds the forms to the main container. Finally, it adds event listeners for the signup and login forms. 
+You can style the forms using CSS as desired.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// Define variables for the main container, signup form, and login form
+const container = document.querySelector('#container');
+const signupForm = document.createElement('form');
+const loginForm = document.createElement('form');
+
+// Define variables for the signup form inputs and button
+const emailInput = document.createElement('input');
+emailInput.type = 'email';
+emailInput.id = 'email-input';
+emailInput.placeholder = 'Email';
+const usernameInput = document.createElement('input');
+usernameInput.type = 'text';
+usernameInput.id = 'username-input';
+usernameInput.placeholder = 'Username';
+const passwordInput = document.createElement('input');
+passwordInput.type = 'password';
+passwordInput.id = 'password-input';
+passwordInput.placeholder = 'Password';
+const signupButton = document.createElement('button');
+signupButton.type = 'submit';
+signupButton.id = 'signup-button';
+signupButton.textContent = 'Sign up';
+
+// Define variables for the login form inputs and button
+const loginUsernameInput = document.createElement('input');
+loginUsernameInput.type = 'text';
+loginUsernameInput.id = 'login-username-input';
+loginUsernameInput.placeholder = 'Username';
+const loginPasswordInput = document.createElement('input');
+loginPasswordInput.type = 'password';
+loginPasswordInput.id = 'login-password-input';
+loginPasswordInput.placeholder = 'Password';
+const loginButton = document.createElement('button');
+loginButton.type = 'submit';
+loginButton.id = 'login-button';
+loginButton.textContent = 'Log in';
+
+// Add the signup form inputs and button to the signup form
+signupForm.appendChild(emailInput);
+signupForm.appendChild(usernameInput);
+signupForm.appendChild(passwordInput);
+signupForm.appendChild(signupButton);
+
+// Add the login form inputs and button to the login form
+loginForm.appendChild(loginUsernameInput);
+loginForm.appendChild(loginPasswordInput);
+loginForm.appendChild(loginButton);
+
+// Add the signup and login forms to the main container
+container.appendChild(signupForm);
+container.appendChild(loginForm);
+
+// Function to handle signup form submission
+function handleSignupForm(event) {
+  event.preventDefault();
+  const email = emailInput.value;
+  const username = usernameInput.value;
+  const password = passwordInput.value;
+  // Code to send the signup data to the server and create a new user account
+  console.log(`Signup form submitted with email: ${email}, username: ${username}, password: ${password}`);
+}
+
+// Function to handle login form submission
+function handleLoginForm(event) {
+  event.preventDefault();
+  const username = loginUsernameInput.value;
+  const password = loginPasswordInput.value;
+  // Code to send the login data to the server and authenticate the user
+  console.log(`Login form submitted with username: ${username}, password: ${password}`);
+}
+
+// Add event listeners for the signup and login forms
+signupForm.addEventListener('submit', handleSignupForm);
+loginForm.addEventListener('submit', handleLoginForm);
